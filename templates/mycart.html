@@ -13,7 +13,7 @@
         <!-- Repeat the following block for each product -->
         <div class="col-md-4 mb-4" >
             <div class="card" style="border: 1px solid gray; padding: 10px; border-radius: 7px; margin: 10px 0px;">
-                <img src="{{product.image.url}}" alt="Product Image" class="img-thumbnail" >
+                <img loading="lazy"src="{{product.image.url}}" alt="Product Image" class="img-thumbnail" >
                 <div class="card-body">
                 <form method="POST">
                     {% csrf_token %}
@@ -37,7 +37,7 @@
 
      {% else %}
         <div class="container" style="display: flex; align-items: center; flex-direction: column; justify-content: center;">
-            <img src="{% static 'images/empty-cart.png' %}" class="image-center" alt="empty">
+            <img loading="lazy"src="{% static 'images/empty-cart.png' %}" class="image-center" alt="empty">
             {% comment %} <h2 class="text-center">Cart is Empty</h2> {% endcomment %}
         </div>
 
