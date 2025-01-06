@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , logout
 from django.contrib import messages
-from .models import Profile, Products, Cart, Orders
+from .models import Contact, Profile, Products, Cart, Orders
 from django.urls import reverse
 from django.db.models import Sum, F
 
@@ -226,3 +226,20 @@ def orderNow(request, unit, product_id):
     except Exception as e:
         print(e)
     return render(request, "orderForm.html", {'unit': unit, 'product_id': product_id})
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('uname')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        # Create a new contact entry in the database
+        contact = Contact(name=name, email=email, message=message)
+        contact.save()
+
+        # After saving the contact data, return a success message
+        messages.success(request,"Message send successfully")
+        return redirect('/contact/')
+    else:
+        return render(request, 'contact.html')
